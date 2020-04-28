@@ -9,31 +9,34 @@
     <script>
          
       function computerPlay() {
-          let choiceList = ['Rock', 'Paper', 'Scissors'];
+          let choiceList = ['rock', 'paper', 'scissors'];
           let i = Math.floor(Math.random()*3);
           return choiceList[i];
       };
       function playRound (playerSelection, computerSelection) {
           let playerWin;
+
           if (playerSelection ===  computerSelection) {
               return `i'ts a draw`;
-
-          switch (playerSelection) {
-              case "rock":
-              playerWin = computerSelection === 'Scissors';
-              break;
-              case "paper":
-              playerWin = computerSelection === 'Rock';
-              break;
-              case "scissors":
-              playerWin = computerSelection === 'Paper';
-              break;
-          }
-          }
-          result = (playerWin) ? `You win! ${playerSelecion} beats ${computerSelection}`:
-          `you loose! ${computerSelection} beats ${playerSelection}`;
-          return result;
+          } else if ( 
+             playerSelection === "rock" && computerSelection === "scissors"
+          || playerSelection === "paper" && computerSelection === "rock"
+          || playerSelection === "scissors" && computerSelection == "paper"
+          ) {
+              return `You win! ${playerSelection} beats ${computerSelection}`;
+          } else {
+              return `you loose! ${computerSelection} beats ${playerSelection}`;
+          } 
+          };
+      function playerPlay() {
+        let str = prompt(`choose: "rock" "paper" or "scissors?"`, "");
+        return str.toLowerCase();
       };
+      const playerSelection = "rock";
+      const computerSelection = computerPlay();
+      console.log(playRound(playerSelection, computerSelection));
+
+
     </script>
 
 </html>
