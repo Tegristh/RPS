@@ -87,7 +87,7 @@
               computerScore ++;
               return `you loose! ${computerSelection} beats ${playerSelection} computer have one more point`;
           } 
-<<<<<<< HEAD
+
           
           
         };
@@ -98,28 +98,8 @@ result.appendChild(finalscore);
    
             
      
-=======
-          };
-      function playerPlay() {
-        let str = prompt(`choose: "rock" "paper" or "scissors?"`, "");
-        return str.toLowerCase();
-      };
-            
-      console.log(playGame(5));
-      
 
-      function playGame(max) {
-      playerScore = 0;
-      computerScore = 0;
-      for (let i = 0; i < max; i ++) {
-          playerSelection = playerPlay();
-          computerSelection = computerPlay();
-          console.log(playRound(playerSelection, computerSelection));
-          };
-      return (playerScore > computerScore) ? `You win the game! ${playerScore}/${computerScore}`
-      : `You loose the game! ${playerScore}/${computerScore}`;
-      };
->>>>>>> 538960c894e220665c459b1d1fcfe29ccab4ae6b
+        
        
         
       
