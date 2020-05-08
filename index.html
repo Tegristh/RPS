@@ -3,23 +3,29 @@
   <head>
     <meta charset="utf-8"/>
     <title>My test page</title>
+    <link href="styles.css" rel="stylesheet">
   </head>
 
   <body>
-    <h1>Rock-Paper-Scissors(lizard-Spock?)</h1>
+    <h1>Rock - Paper - Scissors - lizard - Spock </h1>
     <main>
       <div class="input">
         <button id="rock">Rock!</button>
         <button id="paper">Paper!</button>
         <button id="scissors">scissors!</button>
         <button id="lizard">Lizard!</button>
-        <button id="spock">Spock</button>  
+        <button id="spock">Spock!</button>  
         
       </div>
       <div id="result">
-        
-        
+        <p id="hd1">First to five</p>
+        <p id="hd2">Player</p>
+        <p id="hd3">Computer</p>
+        <p id="player-score">0</p>
+        <p id="computer-score">0</p>
+
       </div>
+
 
     </main>
 
@@ -27,53 +33,53 @@
     <script>
          let playerScore = 0;
          let computerScore = 0;
-         let playerPlay = "";
-         let computerSelection = "";
-         const result = document.getElementById('result');
-         const roundResult = document.createElement("round-result");
-         roundResult.textContent = "";
-         const scores = document.createElement("scores");
-         const finalscore = document.createElement("final-score");
+         const lScore = document.createElement('p');  
+         lScore.id = "logScore"
 
-
-
-
-         const buttons = document.querySelectorAll('button');
-         buttons.forEach((button) =>{
-           button.addEventListener('click', (e) =>{
-             e.stopPropagation();
-             
-            playerPlay = (button.id);
-            computerSelection = computerPlay();
-            rResult = (playRound(playerPlay, computerSelection))+ "</br>"
-            roundResult.innerHTML = rResult; 
-            if (playerScore === 5) {
-               finalscore.innerHTML = "You win the game! </br>";
-               scores.innerHTML = `Player: ${playerScore} | First to 5' | computer: ${computerScore} </br>`;
-            result.appendChild(scores);
-               
-             } else if (computerScore === 5){
-               finalscore.innerHTML = "you loose the game! </br>";
-               scores.innerHTML = `Player: ${playerScore} | First to 5' | computer: ${computerScore} </br>`;
-            result.appendChild(scores);
-               
-             } else {
-            scores.innerHTML = `Player: ${playerScore} | First to 5' | computer: ${computerScore} </br>`;
-            result.appendChild(scores);
-            
-           }})
-         });
-                  
       function computerPlay() {
           let choiceList = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-          let i = Math.floor(Math.random()*5); // replace 3 by 5;
+          let i = Math.floor(Math.random()*5); // replace 3 by 5 for full fun Experience;
           return choiceList[i];
       };
-      function playRound (playerSelection, computerSelection) {
-          let playerWin;
 
+      function printScores(entry) {
+        const result = document.querySelector('#result');
+        const pScore = document.querySelector('#player-score');
+        const cScore = document.querySelector('#computer-score');
+        pScore.innerText = playerScore;
+        cScore.innerText = computerScore;
+        if (entry[0] === 0){
+          lScore.style.backgroundColor= "lightBlue";
+        }
+        else if (entry[0] === 1) {
+          lScore.style.backgroundColor = "green";
+        } else if (entry[0] === 2) {
+          lScore.style.backgroundColor = "orange";
+        };
+        lScore.innerHTML = `You choose : ${entry[2]}, computer choose ${entry[3]}.
+        </br>  ${entry[1]}</br>`;
+        result.appendChild(pScore);
+        result.appendChild(cScore);
+        result.appendChild(lScore);
+
+      };
+      
+      function newTurn() {
+        if (playerScore === 5){
+          alert(`You win the game! ${playerScore} VS${computerScore}!`); 
+          computerScore = 0;
+          playerScore = 0;
+      }else if (computerScore === 5){
+        alert(`You loose the game! ${playerScore} VS${computerScore}!`); 
+          computerScore = 0;
+          playerScore = 0;
+      }else {return;};};
+
+      function playRound (playerSelection) {
+          let playerWin;
+          const computerSelection = computerPlay();
           if (playerSelection ===  computerSelection) {
-              return `it's a draw, nobody win!`;
+              return [0,`it's a draw, nobody win!`, playerSelection, computerSelection];
           } else if ( 
              playerSelection === "rock" && (computerSelection === "scissors" || computerSelection === "lizard")
           || playerSelection === "paper" && (computerSelection === "rock" || computerSelection === "spock")
@@ -82,27 +88,22 @@
           || playerSelection === "spock" && (computerSelection === "rock" || computerSelection === "scissors")
           ) {
               playerScore ++;
-              return `You win! ${playerSelection} beats ${computerSelection} you have one more point`;
+              return [1,`You win! Have one more point!`, playerSelection, computerSelection];
           } else {
               computerScore ++;
-              return `you loose! ${computerSelection} beats ${playerSelection} computer have one more point`;
+              return [2,`you loose! Computer get one more point`,playerSelection, computerSelection];
           } 
-
-          
-          
         };
-result.appendChild(roundResult);
-result.appendChild(finalscore);
 
-
-   
-            
-     
-
-        
-       
-        
-      
+const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            printScores(playRound(button.id));
+            newTurn();
+             
+              
+           });         
+         });
 
     </script>
 

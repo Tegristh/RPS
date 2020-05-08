@@ -1,0 +1,63 @@
+html {
+    text-align: center;
+}
+h1 {
+    
+    color: white;
+    background-color: grey;
+    box-shadow: 5px 5px 5px black;
+
+}
+button {
+    border-radius: 7px;
+    padding: 5px 15px 5px 15px;
+
+}
+.input {
+    display: flex;
+    flex direction: row;
+    justify-content: space-evenly;
+    margin: 0px 0px 0px 0px;
+    background-color: darkgrey;
+    padding: 25px 0px 25px 0px;
+    
+}
+#result {
+    display: grid;
+    grid-template: "header1 header1" auto
+                   "header2 header3" auto
+                   "player-score computer-score" auto
+                   "footer footer" auto;
+    column-gap: 10px;
+    row-gap; 15px;
+    background-color: lightgrey;
+}
+#hd1 {
+    grid-area: header1;
+    font-size: 30px;
+}
+#hd2 {
+    grid-area: header2;
+    font-size: 25px;
+}
+#hd3 {
+    grid-area: header3;
+    font-size: 25px;
+}
+#player-score {
+    margin-top: 30;
+    margin-bottom: 30;
+    grid-area: player-score;
+    font-size: 60px;
+}
+#computer-score {
+    margin-top: 30;
+    margin-bottom: 30;
+    grid-area: computer-score;
+    font-size: 60px;
+}
+#logScore {
+    grid-area: footer;
+    margin: 20px;
+    border-radius: 10px;
+}
